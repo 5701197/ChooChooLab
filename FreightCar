@@ -1,5 +1,7 @@
-import java.awt.*;
+//FreightCar.java
+//Creates a FreightCar
 
+import java.awt.*;
 
 public class FreightCar extends RailCar
 {
