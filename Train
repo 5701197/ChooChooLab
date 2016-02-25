@@ -8,6 +8,18 @@ import java.util.ArrayList;
 public class Train
 {
 
+//ArrayList Attribute?????? (railcar objs)
 
+public Train
+{}
+
+public void addCar()
+{}
+
+public void addCar() //Make this one overloaded
+{}
+
+public void showCar()
+{}
 
 }
