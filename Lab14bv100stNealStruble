@@ -1,13 +1,15 @@
+//Lab14bv100stNealStruble
+//The Runner class for this lab
+
 import java.awt.*;
 import java.applet.*;
 import java.util.ArrayList;
-
 
 public class Lab14bv100stNealStruble extends Applet
 {
 	public void paint(Graphics g)
 	{
-      Train train = new Train(100,300);
+        Train train = new Train(100,300);
       	train.addCar("Locomotive",Color.blue);
       	train.addCar("PassengerCar",Color.gray);
       	train.addCar("PassengerCar",Color.gray);
