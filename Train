@@ -54,17 +54,42 @@ public class Train
    public void addCar(int position, String carType, Color carColor)//Adds a RailCar to Specified Location
    {
    
+      //Makes an RailCar obj of a specific type depending on String entered
+      if(carType.equals("Caboose"))
+      {
+         trainCar = new Caboose(carColor,x,y);
+      }
+      else if(carType.equals("FreightCar"))
+      {
+        trainCar = new FreightCar(carColor,x,y); 
+      }
+      else if(carType.equals("Locomotive"))
+      {
+         trainCar = new Locomotive(carColor,x,y);
+      }
+      else if(carType.equals("PassengerCar"))
+      {
+         trainCar = new PassengerCar(carColor,x,y);
+      }
       
+      wholeTrain.add(position,trainCar); //Adds this obj to position ArrayList
+      //remember car 1 is in position 0
       
       //how chnage x/y for other cars????????
       //Make arraylist of x and arraylist of y and reset cars/remove to change???
       //So use get method and make that a variable and change RailCar array accordingly
-   
-      //have get/set methods too
+      //have get/set methods too for things like list and counter??
       //Y val is same for everything, only x changes (add 175)
       //As cars are added move x and y (might cause problems when printing everytihng)
-      //Use counter for something maybe if counter = # then x = # (set x to counter???)
+      //Use counter for something maybe if counter = # then x = # (set x to counter???) lots if else
+      
+      //Maybe make method that fixes all x vals and call it here so always in order
 
+   }
+   
+   public void xFixer()
+   {
+      //take railcar list and fix here
    }
    
    public void showCars(Graphics g) //Displays all RailCars in order
