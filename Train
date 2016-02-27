@@ -9,20 +9,27 @@ public class Train
    {
       private int x; //X coordinate for train starting point
       private int xTemp; //Temp x coordinate
+      private int xStart; //Initial starting x value
       private int y; //Y coordinate for train starting point
-      private int carCounter; //Int that counts cars added
       private ArrayList<RailCar> wholeTrain; //ArrayList of RailCar objs
       private RailCar trainCar; //A RailCar obj
-      private ArrayList<Integer> xVals; //ArrayList of x values for each car
+      private ArrayList<Integer> xVals; //ArrayList of x values for each car position
+      private Integer xInt; //An Integer Obj
+      private ArrayList<Color> carColors; //An ArrayList of Color objs
 
    public Train(int x, int y) //Constuctor
    {
       this.x = x;
       this.y = y;
+      xStart = x;
       xTemp = x;
-      carCounter = 0;
       wholeTrain = new ArrayList<RailCar>();
       xVals = new ArrayList<Integer>();
+      carColors = new ArrayList<Color>();
+      
+      //Adds initial x value in Integer ArrayList
+      xInt = new Integer(xStart);
+      xVals.add(xInt);
    }
 
    public void addCar(String carType, Color carColor) //Adds a RailCar to the end
@@ -49,16 +56,17 @@ public class Train
       
       x+=175; //Adds 175 to x value for every car added 
 
-      carCounter++; //Adds one to counter
+      //Adds x val into Integer ArrayList
+      xInt = new Integer(x);
+      xVals.add(x); 
       
-      //x = (carCounter-1)*175+100; //Makes x value correct for each car
-      
+      //Adds Color into Color ArrayList
+      carColors.add(carColor);
     }
 
    public void addCar(int position, String carType, Color carColor)//Adds a RailCar to Specified Location
    {
-   
-      xTemp+=(position*175); //Makes x value correct for each car
+      xTemp+=(position*175); //Makes x value correct for new car
    
       //Makes an RailCar obj of a specific type depending on String entered
       if(carType.equals("Caboose"))
@@ -78,24 +86,47 @@ public class Train
          trainCar = new PassengerCar(carColor,xTemp,y);
       }
       
-      wholeTrain.add(position,trainCar); //Adds this obj to position ArrayList
+      wholeTrain.add(position,trainCar); //Adds this obj to position in ArrayList
       
       x+=175; //Adds 175 to x value for every car added
       
-      carCounter++;
-      //remember car 1 is in position 0
+      xTemp = xStart; //xTemp reset to initial x value
       
-      //how chnage x/y for other cars????????
-      //Make arraylist of x and arraylist of y and reset cars/remove to change???
-      //So use get method and make that a variable and change RailCar array accordingly
-      //have get/set methods too for things like list and counter??
-      //Y val is same for everything, only x changes (add 175)
-      //As cars are added move x and y (might cause problems when printing everytihng)
-      //Use counter for something maybe if counter = # then x = # (set x to counter???) lots if else
+      //Adds x val into Integer ArrayList
+      xInt = new Integer(x);
+      xVals.add(x);
+      
+      //Adds Color into Color ArrayList
+      carColors.add(carColor);
+      
+      RailCar temp; //RailCar obj
+      
+      for(int k=position+1;k<=wholeTrain.size()-1;k++)//Loops for everything changed after new RailCar 
+      {
+         temp = wholeTrain.get(k); //Gets RailCar that was just moved (was originally in this position)
+      
+         //Sets old moved cars to their new x value positions
+         if (temp instanceof Caboose == true)
+         {
+            wholeTrain.set(k,new Caboose(carColors.get(k-1),xVals.get(k),y));
+         }
+         else if(temp instanceof FreightCar == true)
+         {
+            wholeTrain.set(k,new FreightCar(carColors.get(k-1),xVals.get(k),y));
+         }
+         else if(temp instanceof Locomotive == true)
+         {
+            wholeTrain.set(k,new Locomotive(carColors.get(k-1),xVals.get(k),y));
+         }
+         else if(temp instanceof PassengerCar == true)
+         {
+            wholeTrain.set(k,new PassengerCar(carColors.get(k-1),xVals.get(k),y));
+         }
+      }
    }
    
    public void showCars(Graphics g) //Displays all RailCars in order
-   {
+   {  
       for(RailCar finalTrain: wholeTrain)
       {
          finalTrain.drawCar(g);
