@@ -82,16 +82,9 @@ public class Train
       //Y val is same for everything, only x changes (add 175)
       //As cars are added move x and y (might cause problems when printing everytihng)
       //Use counter for something maybe if counter = # then x = # (set x to counter???) lots if else
-      
-      //Maybe make method that fixes all x vals and call it here so always in order
 
    }
-   
-   public void xFixer()
-   {
-      //take railcar list and fix here
-   }
-   
+
    public void showCars(Graphics g) //Displays all RailCars in order
    {
       for(RailCar finalTrain: wholeTrain)
