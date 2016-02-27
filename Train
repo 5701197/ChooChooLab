@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Train
    {
       private int x; //X coordinate for train starting point
+      private int xTemp; //Temp x coordinate
       private int y; //Y coordinate for train starting point
       private int carCounter; //Int that counts cars added
       private ArrayList<RailCar> wholeTrain; //ArrayList of RailCar objs
@@ -18,6 +19,7 @@ public class Train
    {
       this.x = x;
       this.y = y;
+      xTemp = x;
       carCounter = 0;
       wholeTrain = new ArrayList<RailCar>();
       xVals = new ArrayList<Integer>();
@@ -46,33 +48,41 @@ public class Train
       wholeTrain.add(trainCar); //Adds this obj to ArrayList
       
       x+=175; //Adds 175 to x value for every car added 
-      
+
       carCounter++; //Adds one to counter
+      
+      //x = (carCounter-1)*175+100; //Makes x value correct for each car
       
     }
 
    public void addCar(int position, String carType, Color carColor)//Adds a RailCar to Specified Location
    {
    
+      xTemp+=(position*175); //Makes x value correct for each car
+   
       //Makes an RailCar obj of a specific type depending on String entered
       if(carType.equals("Caboose"))
       {
-         trainCar = new Caboose(carColor,x,y);
+         trainCar = new Caboose(carColor,xTemp,y);
       }
       else if(carType.equals("FreightCar"))
       {
-        trainCar = new FreightCar(carColor,x,y); 
+        trainCar = new FreightCar(carColor,xTemp,y); 
       }
       else if(carType.equals("Locomotive"))
       {
-         trainCar = new Locomotive(carColor,x,y);
+         trainCar = new Locomotive(carColor,xTemp,y);
       }
       else if(carType.equals("PassengerCar"))
       {
-         trainCar = new PassengerCar(carColor,x,y);
+         trainCar = new PassengerCar(carColor,xTemp,y);
       }
       
       wholeTrain.add(position,trainCar); //Adds this obj to position ArrayList
+      
+      x+=175; //Adds 175 to x value for every car added
+      
+      carCounter++;
       //remember car 1 is in position 0
       
       //how chnage x/y for other cars????????
@@ -82,9 +92,8 @@ public class Train
       //Y val is same for everything, only x changes (add 175)
       //As cars are added move x and y (might cause problems when printing everytihng)
       //Use counter for something maybe if counter = # then x = # (set x to counter???) lots if else
-
    }
-
+   
    public void showCars(Graphics g) //Displays all RailCars in order
    {
       for(RailCar finalTrain: wholeTrain)
