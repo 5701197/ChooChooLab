@@ -98,6 +98,9 @@ public class Train
       
       //Adds Color into Color ArrayList
       carColors.add(carColor);
+      //Makes sure colors are in correct order
+      carColors.set(position+1,carColors.get(position));
+      carColors.set(position,carColor);
       
       RailCar temp; //RailCar obj
       
@@ -108,19 +111,19 @@ public class Train
          //Sets old moved cars to their new x value positions
          if (temp instanceof Caboose == true)
          {
-            wholeTrain.set(k,new Caboose(carColors.get(k-1),xVals.get(k),y));
+            wholeTrain.set(k,new Caboose(carColors.get(k),xVals.get(k),y));
          }
          else if(temp instanceof FreightCar == true)
          {
-            wholeTrain.set(k,new FreightCar(carColors.get(k-1),xVals.get(k),y));
+            wholeTrain.set(k,new FreightCar(carColors.get(k),xVals.get(k),y));
          }
          else if(temp instanceof Locomotive == true)
          {
-            wholeTrain.set(k,new Locomotive(carColors.get(k-1),xVals.get(k),y));
+            wholeTrain.set(k,new Locomotive(carColors.get(k),xVals.get(k),y));
          }
          else if(temp instanceof PassengerCar == true)
          {
-            wholeTrain.set(k,new PassengerCar(carColors.get(k-1),xVals.get(k),y));
+            wholeTrain.set(k,new PassengerCar(carColors.get(k),xVals.get(k),y));
          }
       }
    }
